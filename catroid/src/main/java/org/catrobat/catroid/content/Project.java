@@ -26,6 +26,8 @@ import android.content.Context;
 import android.os.Build;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import org.catrobat.catroid.R;
 import org.catrobat.catroid.common.BroadcastMessageContainer;
@@ -36,6 +38,7 @@ import org.catrobat.catroid.content.bricks.Brick;
 import org.catrobat.catroid.formulaeditor.UserList;
 import org.catrobat.catroid.formulaeditor.UserVariable;
 import org.catrobat.catroid.io.XStreamFieldKeyOrder;
+import org.catrobat.catroid.io.XStreamListWithoutDuplicatesConverter;
 import org.catrobat.catroid.physics.content.ActionPhysicsFactory;
 import org.catrobat.catroid.stage.StageActivity;
 import org.catrobat.catroid.utils.FileMetaDataExtractor;
@@ -66,10 +69,18 @@ public class Project implements Serializable {
 	private XmlHeader xmlHeader = new XmlHeader();
 	@XStreamAlias("settings")
 	private List<Setting> settings = new ArrayList<>();
+
+
+	//@XStreamImplicit(itemFieldName = "programVariableList") @XStreamConverter(XStreamListWithoutDuplicatesConverter
+	// .class)
 	@XStreamAlias("programVariableList")
 	private List<UserVariable> userVariables = new ListWithoutDuplicates<>();
+
+	//@XStreamImplicit(itemFieldName = "programListOfLists") @XStreamConverter(XStreamListWithoutDuplicatesConverter
+	// .class)
 	@XStreamAlias("programListOfLists")
 	private List<UserList> userLists = new ListWithoutDuplicates<>();
+
 	@XStreamAlias("scenes")
 	private List<Scene> sceneList = new ArrayList<>();
 

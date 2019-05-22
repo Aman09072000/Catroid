@@ -41,6 +41,7 @@ import org.catrobat.catroid.content.CollisionScript;
 import org.catrobat.catroid.content.GroupItemSprite;
 import org.catrobat.catroid.content.GroupSprite;
 import org.catrobat.catroid.content.LegoNXTSetting;
+import org.catrobat.catroid.content.ListWithoutDuplicates;
 import org.catrobat.catroid.content.Project;
 import org.catrobat.catroid.content.RaspiInterruptScript;
 import org.catrobat.catroid.content.Scene;
@@ -208,6 +209,7 @@ import org.catrobat.catroid.utils.StringFinder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -267,10 +269,16 @@ public final class XstreamSerializer {
 
 		xstream.registerConverter(new XStreamConcurrentFormulaHashMapConverter());
 		xstream.registerConverter(new XStreamUserVariableConverter());
+		// LWD Converter
+		xstream.registerConverter(new XStreamListWithoutDuplicatesConverter(xstream.getMapper()));
+
 		xstream.registerConverter(new XStreamBrickConverter(xstream.getMapper(), xstream.getReflectionProvider()));
 		xstream.registerConverter(new XStreamScriptConverter(xstream.getMapper(), xstream.getReflectionProvider()));
 		xstream.registerConverter(new XStreamSpriteConverter(xstream.getMapper(), xstream.getReflectionProvider()));
 		xstream.registerConverter(new XStreamSettingConverter(xstream.getMapper(), xstream.getReflectionProvider()));
+
+		// LWD Default Implementation
+		//xstream.addDefaultImplementation(ArrayList.class, ListWithoutDuplicates.class);
 
 		xstream.omitField(sceneClass, "originalWidth");
 		xstream.omitField(sceneClass, "originalHeight");

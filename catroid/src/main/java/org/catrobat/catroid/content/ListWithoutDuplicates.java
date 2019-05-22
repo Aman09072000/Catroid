@@ -23,14 +23,20 @@
 
 package org.catrobat.catroid.content;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class ListWithoutDuplicates<T> extends ArrayList<T> {
+public class ListWithoutDuplicates<T> extends ArrayList<T> implements List<T>, Serializable {
+	private static final long serialVersionUID = 8683452581122892189L;
 
-	private final Set<T> comparingSet = new HashSet<T>();
+	private transient final Set<T> comparingSet = new HashSet<T>();
 
 	private Collection<T> getUniqueValues(Collection<? extends T> collection) {
 		Collection<T> uniqueValues = new ArrayList<T>();
@@ -42,6 +48,8 @@ public class ListWithoutDuplicates<T> extends ArrayList<T> {
 
 		return uniqueValues;
 	}
+
+
 
 	@Override
 	public boolean add(T t) {
@@ -134,5 +142,16 @@ public class ListWithoutDuplicates<T> extends ArrayList<T> {
 		} catch (IndexOutOfBoundsException ioobException) {
 			throw ioobException;
 		}
+	}
+
+	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+		aInputStream.defaultReadObject();
+
+		comparingSet.clear();
+		comparingSet.addAll(this);
+	}
+
+	private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
+		aOutputStream.defaultWriteObject();
 	}
 }
