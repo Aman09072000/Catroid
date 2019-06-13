@@ -83,7 +83,9 @@
                 android:id="@+id/project_upload_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:selectAllOnFocus="true" />
+                android:editable="true"
+                android:selectAllOnFocus="true"
+                android:textColor="#FFFF" />
 
         </android.support.design.widget.TextInputLayout>
 
