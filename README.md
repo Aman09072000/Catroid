@@ -1,4 +1,4 @@
-# Catroid #
+#  Catroid  #
 
 Catroid, also known as **Pocket Code**, is an on-device visual programming system for Android devices.
 
