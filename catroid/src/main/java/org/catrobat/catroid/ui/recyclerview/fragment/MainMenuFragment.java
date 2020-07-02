@@ -23,8 +23,8 @@
 
 package org.catrobat.catroid.ui.recyclerview.fragment;
 
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.catrobat.catroid.R;
-import org.catrobat.catroid.common.Constants;
+import org.catrobat.catroid.StageModule;
 import org.catrobat.catroid.common.ProjectData;
 import org.catrobat.catroid.content.backwardcompatibility.ProjectMetaDataParser;
 import org.catrobat.catroid.io.ProjectAndSceneScreenshotLoader;
@@ -50,6 +50,7 @@ import org.catrobat.catroid.ui.recyclerview.viewholder.ButtonVH;
 import org.catrobat.catroid.utils.FileMetaDataExtractor;
 import org.catrobat.catroid.utils.ToastUtil;
 import org.catrobat.catroid.utils.Utils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +60,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -73,9 +75,15 @@ import static org.catrobat.catroid.common.FlavoredConstants.DEFAULT_ROOT_DIRECTO
 
 public class MainMenuFragment extends Fragment implements
 		ButtonAdapter.OnItemClickListener,
-		ProjectLoadTask.ProjectLoadListener {
+		ProjectLoadTask.ProjectLoadListener,
+		StageModule {
 
 	public static final String TAG = MainMenuFragment.class.getSimpleName();
+
+	@Override
+	public void startStageWithProject(@NotNull Context context, @NotNull String projectName) {
+		org.catrobat.stagemodule.StageModule.Companion.startStageWithProject(context, projectName);
+	}
 
 	@Retention(RetentionPolicy.SOURCE)
 	@IntDef({NEW, PROGRAMS, HELP, EXPLORE, UPLOAD})
@@ -192,8 +200,9 @@ public class MainMenuFragment extends Fragment implements
 				startActivity(new Intent(getActivity(), ProjectListActivity.class));
 				break;
 			case HELP:
-				setShowProgressBar(true);
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CATROBAT_HELP_URL)));
+				startStageWithProject(Objects.requireNonNull(getContext()), "TestProgram");
+				/*setShowProgressBar(true);
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.CATROBAT_HELP_URL)));*/
 				break;
 			case EXPLORE:
 				setShowProgressBar(true);

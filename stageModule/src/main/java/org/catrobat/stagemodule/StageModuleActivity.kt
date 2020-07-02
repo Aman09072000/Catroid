@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2016 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,4 +21,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include ':catroid', ':stageModule'
+package org.catrobat.stagemodule
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity.txtProgramName
+
+class StageModuleActivity : AppCompatActivity() {
+    private var programName : String = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity)
+
+        programName = intent.getStringExtra("projectName")
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        txtProgramName.text = programName
+    }
+
+
+
+
+
+
+
+}
