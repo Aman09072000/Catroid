@@ -38,8 +38,8 @@ import org.catrobat.catroid.formulaeditor.UserList
 import org.catrobat.catroid.formulaeditor.UserVariable
 import org.catrobat.catroid.nfc.NfcHandler
 import org.catrobat.catroid.sensing.CollisionDetection
-import org.catrobat.catroid.stage.StageActivity
-import org.catrobat.catroid.stage.StageListener
+import org.catrobat.stage.StageActivity
+import org.catrobat.stage.StageListener
 import org.catrobat.catroid.utils.NumberFormats
 import org.catrobat.catroid.utils.TouchUtil
 import java.lang.Double.valueOf
@@ -110,7 +110,7 @@ object FormulaElementOperations {
     @JvmStatic
     fun tryCalculateCollidesWithEdge(
         look: Look,
-        stageListener: StageListener?,
+        stageListener: org.catrobat.stage.StageListener?,
         screen: Rectangle?
     ): Double {
         return if (stageListener?.firstFrameDrawn == true) {
@@ -162,7 +162,7 @@ object FormulaElementOperations {
             Sensors.NFC_TAG_ID -> NfcHandler.getLastNfcTagId()
             Sensors.COLLIDES_WITH_EDGE -> tryCalculateCollidesWithEdge(
                 look,
-                StageActivity.stageListener,
+                org.catrobat.stage.StageActivity.stageListener,
                 currentProject.screenRectangle
             )
             Sensors.COLLIDES_WITH_FINGER -> calculateCollidesWithFinger(look)
@@ -171,7 +171,7 @@ object FormulaElementOperations {
     }
 
     @JvmStatic
-    fun getAllClones(sprite: Sprite, stageListener: StageListener?): List<Sprite> {
+    fun getAllClones(sprite: Sprite, stageListener: org.catrobat.stage.StageListener?): List<Sprite> {
         return stageListener?.let {
             listOf(sprite) + it.getAllClonesOfSprite(sprite)
         } ?: listOf(sprite)
@@ -251,7 +251,7 @@ object FormulaElementOperations {
         firstLook: Look,
         secondSpriteName: String?,
         currentlyPlayingScene: Scene,
-        stageListener: StageListener?
+        stageListener: org.catrobat.stage.StageListener?
     ): Double {
         val secondSprite =
             tryFindSprite(currentlyPlayingScene, secondSpriteName) ?: return Conversions.FALSE
@@ -271,7 +271,7 @@ object FormulaElementOperations {
         firstLook: Look,
         secondSpriteName: String?,
         currentlyPlayingScene: Scene,
-        stageListener: StageListener?
+        stageListener: org.catrobat.stage.StageListener?
     ): Double {
         return try {
             interpretCollision(firstLook, secondSpriteName, currentlyPlayingScene, stageListener)

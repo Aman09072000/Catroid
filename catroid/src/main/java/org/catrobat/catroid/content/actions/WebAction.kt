@@ -32,8 +32,8 @@ import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.formulaeditor.InterpretationException
 import org.catrobat.catroid.stage.BrickDialogManager
-import org.catrobat.catroid.stage.StageActivity
-import org.catrobat.catroid.stage.StageActivity.stageListener
+import org.catrobat.stage.StageActivity
+import org.catrobat.stage.StageActivity.stageListener
 import org.catrobat.catroid.web.WebConnection
 import org.catrobat.catroid.web.WebConnection.WebRequestListener
 
@@ -68,12 +68,13 @@ abstract class WebAction : Action(), WebRequestListener {
     }
 
     private fun askForPermission() {
-        if (StageActivity.messageHandler == null) {
+        if (org.catrobat.stage.StageActivity.messageHandler == null) {
             denyPermission()
         } else {
             permissionStatus = PermissionStatus.PENDING
             val params = arrayListOf(BrickDialogManager.DialogType.WEB_ACCESS_DIALOG, this, url!!)
-            StageActivity.messageHandler.obtainMessage(StageActivity.SHOW_DIALOG, params).sendToTarget()
+            org.catrobat.stage.StageActivity.messageHandler.obtainMessage(
+                org.catrobat.stage.StageActivity.SHOW_DIALOG, params).sendToTarget()
         }
     }
 

@@ -39,7 +39,7 @@ import org.catrobat.catroid.content.Scene;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.embroidery.DSTFileGenerator;
 import org.catrobat.catroid.stage.StageActivity;
-import org.catrobat.catroid.stage.StageLifeCycleController;
+import org.catrobat.stage.StageLifeCycleController;
 import org.catrobat.catroid.stage.StageListener;
 import org.catrobat.catroid.ui.ExportEmbroideryFileLauncher;
 import org.catrobat.catroid.utils.FileMetaDataExtractor;

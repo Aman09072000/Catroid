@@ -28,7 +28,7 @@ import org.catrobat.catroid.CatroidApplication
 import org.catrobat.catroid.R
 import org.catrobat.catroid.common.LookData
 import org.catrobat.catroid.io.StorageOperations
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.catrobat.catroid.utils.Utils
 import java.io.File
 import java.io.IOException
@@ -83,7 +83,8 @@ open class LookRequestAction : WebAction() {
 
     private fun showToastMessage(message: String) {
         val params = ArrayList<Any>(listOf(message))
-        StageActivity.messageHandler.obtainMessage(StageActivity.SHOW_TOAST, params).sendToTarget()
+        org.catrobat.stage.StageActivity.messageHandler.obtainMessage(
+            org.catrobat.stage.StageActivity.SHOW_TOAST, params).sendToTarget()
     }
 
     override fun handleError(error: String) {

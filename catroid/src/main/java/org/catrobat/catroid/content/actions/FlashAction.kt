@@ -23,16 +23,16 @@
 package org.catrobat.catroid.content.actions
 
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 
 class FlashAction : TemporalAction() {
     var flashOn = false
 
     override fun update(percent: Float) {
         if (flashOn) {
-            StageActivity.getActiveCameraManager()?.enableFlash()
+            org.catrobat.stage.StageActivity.getActiveCameraManager()?.enableFlash()
         } else {
-            StageActivity.getActiveCameraManager()?.disableFlash()
+            org.catrobat.stage.StageActivity.getActiveCameraManager()?.disableFlash()
         }
     }
 }

@@ -37,12 +37,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import org.catrobat.catroid.R
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.catrobat.catroid.utils.ToastUtil
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 
-class CameraManager(private val stageActivity: StageActivity) : LifecycleOwner {
+class CameraManager(private val stageActivity: org.catrobat.stage.StageActivity) : LifecycleOwner {
     private val cameraProvider = ProcessCameraProvider.getInstance(stageActivity).get()
     private val lifecycle = LifecycleRegistry(this)
     private val previewView = PreviewView(stageActivity).also {

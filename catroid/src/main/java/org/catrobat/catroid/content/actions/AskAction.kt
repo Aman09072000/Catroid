@@ -29,7 +29,7 @@ import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.formulaeditor.InterpretationException
 import org.catrobat.catroid.formulaeditor.UserVariable
 import org.catrobat.catroid.stage.BrickDialogManager
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 
 class AskAction : Action() {
     private var sprite: Sprite? = null
@@ -38,7 +38,7 @@ class AskAction : Action() {
     var questionAsked = false
     private var answerReceived = false
     private fun askQuestion() {
-        StageActivity.messageHandler ?: return
+        org.catrobat.stage.StageActivity.messageHandler ?: return
         var question = ""
         try {
             question = questionFormula?.interpretString(sprite) ?: ""
@@ -50,7 +50,8 @@ class AskAction : Action() {
         }
 
         val params = arrayListOf(BrickDialogManager.DialogType.ASK_DIALOG, this, question)
-        StageActivity.messageHandler.obtainMessage(StageActivity.SHOW_DIALOG, params).sendToTarget()
+        org.catrobat.stage.StageActivity.messageHandler.obtainMessage(
+            org.catrobat.stage.StageActivity.SHOW_DIALOG, params).sendToTarget()
         questionAsked = true
     }
 

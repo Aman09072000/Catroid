@@ -25,7 +25,7 @@ package org.catrobat.catroid.test.content.actions
 import com.badlogic.gdx.utils.GdxNativesLoader
 import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.content.actions.CameraBrickAction
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,7 +38,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
 
 @RunWith(PowerMockRunner::class)
-@PrepareForTest(GdxNativesLoader::class, StageActivity::class)
+@PrepareForTest(GdxNativesLoader::class, org.catrobat.stage.StageActivity::class)
 class CameraBrickActionTest {
     private lateinit var testSprite: Sprite
     private lateinit var cameraManager: org.catrobat.catroid.camera.CameraManager
@@ -49,8 +49,8 @@ class CameraBrickActionTest {
         testSprite = Sprite("testSprite")
         cameraManager = mock(org.catrobat.catroid.camera.CameraManager::class.java)
         mockStatic(GdxNativesLoader::class.java)
-        mockStatic(StageActivity::class.java)
-        given(StageActivity.getActiveCameraManager()).willReturn(cameraManager)
+        mockStatic(org.catrobat.stage.StageActivity::class.java)
+        given(org.catrobat.stage.StageActivity.getActiveCameraManager()).willReturn(cameraManager)
         // PowerMockito.doNothing().`when`(cameraManager).setFlashMode(anyBoolean())
     }
 

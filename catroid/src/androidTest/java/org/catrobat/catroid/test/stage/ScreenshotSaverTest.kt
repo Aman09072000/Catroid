@@ -28,9 +28,9 @@ import com.badlogic.gdx.backends.android.AndroidFiles
 import kotlinx.coroutines.runBlocking
 import org.catrobat.catroid.common.ScreenValues
 import org.catrobat.catroid.io.StorageOperations
-import org.catrobat.catroid.stage.ScreenshotSaver
-import org.catrobat.catroid.stage.ScreenshotSaverCallback
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.ScreenshotSaver
+import org.catrobat.stage.ScreenshotSaverCallback
+import org.catrobat.stage.StageActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -46,7 +46,7 @@ import java.io.File
 class ScreenshotSaverTest(private val name: String, private val fileName: String?, private val expectedResult: Boolean) {
     @Rule
     @JvmField
-    var activityTestRule = ActivityTestRule(StageActivity::class.java, false, true)
+    var activityTestRule = ActivityTestRule(org.catrobat.stage.StageActivity::class.java, false, true)
 
     companion object {
         @JvmStatic
@@ -61,7 +61,7 @@ class ScreenshotSaverTest(private val name: String, private val fileName: String
         private const val NUMBER_OF_COLORS = 4
     }
 
-    private lateinit var screenshotSaver: ScreenshotSaver
+    private lateinit var screenshotSaver: org.catrobat.stage.ScreenshotSaver
     private lateinit var dummyData: ByteArray
     private lateinit var gdxFileHandler: Files
 
@@ -74,7 +74,12 @@ class ScreenshotSaverTest(private val name: String, private val fileName: String
         val stageActivity = activityTestRule.activity
         val folder = stageActivity.cacheDir.absolutePath + "/"
         gdxFileHandler = AndroidFiles(stageActivity.assets, stageActivity.filesDir.absolutePath)
-        screenshotSaver = ScreenshotSaver(gdxFileHandler as AndroidFiles, folder, width, height)
+        screenshotSaver = org.catrobat.stage.ScreenshotSaver(
+            gdxFileHandler as AndroidFiles,
+            folder,
+            width,
+            height
+        )
     }
 
     @After
@@ -85,7 +90,7 @@ class ScreenshotSaverTest(private val name: String, private val fileName: String
 
     @Test
     fun testSaveScreenshotAndNotify() {
-        val callbackMock = Mockito.mock(ScreenshotSaverCallback::class.java)
+        val callbackMock = Mockito.mock(org.catrobat.stage.ScreenshotSaverCallback::class.java)
         runBlocking {
             screenshotSaver.saveScreenshotAndNotify(dummyData, fileName, callbackMock, this)
         }

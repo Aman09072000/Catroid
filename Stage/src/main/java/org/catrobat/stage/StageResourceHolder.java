@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2018 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.catrobat.catroid.stage;
+package org.catrobat.stage;
 
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -182,7 +182,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 
 		if (requiredResourcesSet.contains(Brick.ARDRONE_SUPPORT) && BuildConfig.FEATURE_PARROT_AR_DRONE_ENABLED) {
 			boolean agreedToDroneTermsOfUsePermanently = PreferenceManager.getDefaultSharedPreferences(stageActivity)
-					.getBoolean(SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, false);
+					.getBoolean(SettingsFragment.SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, false);
 
 			if (agreedToDroneTermsOfUsePermanently) {
 				onDroneTermsOfUseAgreed();
@@ -198,7 +198,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 										.findViewById(R.id.dialog_terms_of_use_check_box_agree_permanently);
 								PreferenceManager.getDefaultSharedPreferences(stageActivity)
 										.edit()
-										.putBoolean(SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, checkBox.isChecked())
+										.putBoolean(SettingsFragment.SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, checkBox.isChecked())
 										.apply();
 								onDroneTermsOfUseAgreed();
 							}
@@ -219,7 +219,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 						String url = alertDialog.getContext()
 								.getString(R.string.dialog_terms_of_use_link_text_parrot_reminder);
 						url = alertDialog.getContext()
-								.getString(R.string.terms_of_use_link_template, CATROBAT_TERMS_OF_USE_URL, url);
+								.getString(R.string.terms_of_use_link_template, Constants.CATROBAT_TERMS_OF_USE_URL, url);
 						TextView urlView = alertDialog.findViewById(R.id.dialog_terms_of_use_text_view_url);
 						urlView.setText(Html.fromHtml(url));
 					}
@@ -231,7 +231,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 
 		if (BuildConfig.FEATURE_PARROT_JUMPING_SUMO_ENABLED && requiredResourcesSet.contains(Brick.JUMPING_SUMO)) {
 			boolean agreedToDroneTermsOfUsePermanently = PreferenceManager.getDefaultSharedPreferences(stageActivity)
-					.getBoolean(SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, false);
+					.getBoolean(SettingsFragment.SETTINGS_PARROT_AR_DRONE_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY, false);
 			if (agreedToDroneTermsOfUsePermanently) {
 				onJSDroneTermsOfUseAgreed();
 			} else {
@@ -246,7 +246,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 										.findViewById(R.id.dialog_terms_of_use_check_box_agree_permanently);
 								PreferenceManager.getDefaultSharedPreferences(stageActivity)
 										.edit()
-										.putBoolean(SETTINGS_PARROT_JUMPING_SUMO_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY,
+										.putBoolean(SettingsFragment.SETTINGS_PARROT_JUMPING_SUMO_CATROBAT_TERMS_OF_SERVICE_ACCEPTED_PERMANENTLY,
 												checkBox.isChecked())
 										.apply();
 								onJSDroneTermsOfUseAgreed();
@@ -268,7 +268,7 @@ public class StageResourceHolder implements GatherCollisionInformationTask.OnPol
 						String url = alertDialog.getContext()
 								.getString(R.string.dialog_terms_of_use_jumpingsumo_reminder_text);
 						url = alertDialog.getContext()
-								.getString(R.string.terms_of_use_link_template, CATROBAT_TERMS_OF_USE_URL, url);
+								.getString(R.string.terms_of_use_link_template, Constants.CATROBAT_TERMS_OF_USE_URL, url);
 						TextView urlView = alertDialog.findViewById(R.id.dialog_terms_of_use_text_view_url);
 						urlView.setText(Html.fromHtml(url));
 					}

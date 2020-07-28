@@ -23,18 +23,21 @@
 package org.catrobat.catroid.content.actions
 
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
-import org.catrobat.catroid.stage.StageActivity
-import org.catrobat.catroid.stage.TestResult
+import org.catrobat.stage.StageActivity
+import org.catrobat.stage.TestResult
 
 class FinishStageAction : TemporalAction() {
     var silent: Boolean = false
 
     override fun update(percent: Float) {
         if (silent) {
-            StageActivity.finishStage()
+            org.catrobat.stage.StageActivity.finishStage()
         } else {
-            StageActivity.finishTestWithResult(
-                TestResult(SUCCESS_MESSAGE, TestResult.STAGE_ACTIVITY_TEST_SUCCESS)
+            org.catrobat.stage.StageActivity.finishTestWithResult(
+                org.catrobat.stage.TestResult(
+                    SUCCESS_MESSAGE,
+                    org.catrobat.stage.TestResult.STAGE_ACTIVITY_TEST_SUCCESS
+                )
             )
         }
     }

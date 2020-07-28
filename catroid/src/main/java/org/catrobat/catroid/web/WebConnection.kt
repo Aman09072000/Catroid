@@ -29,7 +29,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.catrobat.catroid.common.Constants
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import java.io.IOException
 import java.lang.ref.WeakReference
 
@@ -38,7 +38,7 @@ class WebConnection(private val okHttpClient: OkHttpClient, listener: WebRequest
     private var call: Call? = null
 
     constructor(listener: WebRequestListener, url: String) :
-        this(StageActivity.stageListener.webConnectionHolder.okHttpClient, listener, url)
+        this(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder.okHttpClient, listener, url)
 
     companion object {
         private const val EXCEPTION_MESSAGE_TIMEOUT = "timeout"

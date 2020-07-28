@@ -25,7 +25,7 @@ package org.catrobat.catroid.ui
 
 import android.content.Intent
 import androidx.core.content.FileProvider
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import java.io.File
 
 interface ExportLauncher {
@@ -33,7 +33,7 @@ interface ExportLauncher {
 }
 
 class ExportEmbroideryFileLauncher(
-    private val activity: StageActivity,
+    private val activity: org.catrobat.stage.StageActivity,
     private val file: File
 ) : ExportLauncher {
 

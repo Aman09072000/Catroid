@@ -139,7 +139,7 @@
             android:windowSoftInputMode="adjustNothing"/>
 
         <activity
-            android:name=".stage.StageActivity"
+            android:name="org.catrobat.stage.StageActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/stage"
             android:screenOrientation="portrait"

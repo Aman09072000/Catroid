@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2018 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.catrobat.catroid.stage;
+package org.catrobat.stage;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -33,7 +33,6 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.surfaceview.GLSurfaceView20;
 
 import org.catrobat.catroid.ProjectManager;
-import org.catrobat.catroid.R;
 import org.catrobat.catroid.bluetooth.base.BluetoothDeviceService;
 import org.catrobat.catroid.cast.CastManager;
 import org.catrobat.catroid.common.CatroidService;
@@ -46,6 +45,10 @@ import org.catrobat.catroid.formulaeditor.SensorHandler;
 import org.catrobat.catroid.formulaeditor.UserDataWrapper;
 import org.catrobat.catroid.io.SoundManager;
 import org.catrobat.catroid.io.StageAudioFocus;
+import org.catrobat.catroid.stage.BrickDialogManager;
+import org.catrobat.catroid.stage.StageActivity;
+import org.catrobat.catroid.stage.StageListener;
+import org.catrobat.catroid.stage.StageResourceHolder;
 import org.catrobat.catroid.ui.dialogs.StageDialog;
 import org.catrobat.catroid.ui.runtimepermissions.RequiresPermissionTask;
 import org.catrobat.catroid.utils.VibrationUtil;
@@ -113,7 +116,7 @@ public final class StageLifeCycleController {
 		stageActivity.stageAudioFocus = new StageAudioFocus(stageActivity);
 		stageActivity.stageResourceHolder = new StageResourceHolder(stageActivity);
 
-		List<String> requiredPermissions = getProjectsRuntimePermissionList();
+		List<String> requiredPermissions = StageResourceHolder.getProjectsRuntimePermissionList();
 		if (requiredPermissions.isEmpty()) {
 			stageActivity.stageResourceHolder.initResources();
 		} else {
@@ -126,7 +129,7 @@ public final class StageLifeCycleController {
 	}
 
 	static void stagePause(final StageActivity stageActivity) {
-		if (checkPermission(stageActivity, getProjectsRuntimePermissionList())) {
+		if (RequiresPermissionTask.checkPermission(stageActivity, StageResourceHolder.getProjectsRuntimePermissionList())) {
 			if (stageActivity.nfcAdapter != null) {
 				try {
 					stageActivity.nfcAdapter.disableForegroundDispatch(stageActivity);
@@ -165,7 +168,7 @@ public final class StageLifeCycleController {
 			return;
 		}
 
-		if (checkPermission(stageActivity, getProjectsRuntimePermissionList())) {
+		if (RequiresPermissionTask.checkPermission(stageActivity, StageResourceHolder.getProjectsRuntimePermissionList())) {
 			Brick.ResourcesSet resourcesSet = ProjectManager.getInstance().getCurrentProject().getRequiredResources();
 			List<Sprite> spriteList = ProjectManager.getInstance().getCurrentlyPlayingScene().getSpriteList();
 
@@ -223,7 +226,7 @@ public final class StageLifeCycleController {
 	}
 
 	static void stageDestroy(StageActivity stageActivity) {
-		if (checkPermission(stageActivity, getProjectsRuntimePermissionList())) {
+		if (RequiresPermissionTask.checkPermission(stageActivity, StageResourceHolder.getProjectsRuntimePermissionList())) {
 			stageActivity.brickDialogManager.dismissAllDialogs();
 			stageActivity.jumpingSumoDisconnect();
 			BluetoothDeviceService service = ServiceProvider.getService(CatroidService.BLUETOOTH_DEVICE_SERVICE);

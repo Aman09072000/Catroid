@@ -32,8 +32,8 @@ import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.content.actions.LookRequestAction
 import org.catrobat.catroid.content.actions.WebAction
 import org.catrobat.catroid.formulaeditor.Formula
-import org.catrobat.catroid.stage.StageActivity
-import org.catrobat.catroid.stage.StageListener
+import org.catrobat.stage.StageActivity
+import org.catrobat.stage.StageListener
 import org.catrobat.catroid.web.WebConnection
 import org.catrobat.catroid.web.WebConnectionHolder
 import org.junit.After
@@ -82,8 +82,8 @@ class LookRequestActionTest {
         response = mock(Response::class.java)
         responseStream = mock(InputStream::class.java)
 
-        StageActivity.stageListener = mock(StageListener::class.java)
-        StageActivity.stageListener.webConnectionHolder = mock(WebConnectionHolder::class.java)
+        org.catrobat.stage.StageActivity.stageListener = mock(org.catrobat.stage.StageListener::class.java)
+        org.catrobat.stage.StageActivity.stageListener.webConnectionHolder = mock(WebConnectionHolder::class.java)
 
         whenNew(WebConnection::class.java).withAnyArguments().thenReturn(webConnection)
         val responseBody = mock(ResponseBody::class.java)
@@ -110,7 +110,7 @@ class LookRequestActionTest {
         ) as LookRequestAction
         action.grantPermission()
 
-        doReturn(false).`when`(StageActivity.stageListener.webConnectionHolder)
+        doReturn(false).`when`(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder)
             .addConnection(webConnection)
 
         assertTrue(action.act(0f))
@@ -126,7 +126,7 @@ class LookRequestActionTest {
         ) as LookRequestAction
         action.grantPermission()
 
-        doReturn(true).`when`(StageActivity.stageListener.webConnectionHolder)
+        doReturn(true).`when`(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder)
             .addConnection(webConnection)
 
         doAnswer {
@@ -149,7 +149,7 @@ class LookRequestActionTest {
         }
 
         doReturn(lookData2).`when`(action).getLookFromResponse()
-        doReturn(true).`when`(StageActivity.stageListener.webConnectionHolder)
+        doReturn(true).`when`(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder)
             .addConnection(webConnection)
 
         doAnswer {
@@ -184,7 +184,7 @@ class LookRequestActionTest {
             grantPermission()
         }
 
-        doReturn(true).`when`(StageActivity.stageListener.webConnectionHolder)
+        doReturn(true).`when`(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder)
             .addConnection(webConnection)
         doReturn(lookData2).`when`(action).getLookFromResponse()
 
@@ -200,7 +200,7 @@ class LookRequestActionTest {
 
         PowerMockito.verifyNew(WebConnection::class.java, times(2))
             .withArguments(any(), anyString())
-        Mockito.verify(StageActivity.stageListener.webConnectionHolder, times(2))
+        Mockito.verify(org.catrobat.stage.StageActivity.stageListener.webConnectionHolder, times(2))
             .addConnection(webConnection)
         Mockito.verify(webConnection, times(2)).sendWebRequest()
 
@@ -210,7 +210,7 @@ class LookRequestActionTest {
 
     @After
     fun tearDown() {
-        StageActivity.stageListener.webConnectionHolder = null
-        StageActivity.stageListener = null
+        org.catrobat.stage.StageActivity.stageListener.webConnectionHolder = null
+        org.catrobat.stage.StageActivity.stageListener = null
     }
 }

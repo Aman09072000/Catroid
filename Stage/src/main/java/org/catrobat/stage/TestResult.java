@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2018 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,45 +20,36 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.catrobat.catroid.stage;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+package org.catrobat.stage;
 
-public class TextActor extends Actor {
+public class TestResult {
 
-	private int posX;
-	private int posY;
-	private String text;
-	private BitmapFont font;
+	public static final int STAGE_ACTIVITY_TEST_SUCCESS = 7777;
+	public static final int STAGE_ACTIVITY_TEST_FAIL = 8888;
+	public static final String TEST_RESULT_MESSAGE = "ASSERTION_MESSAGE";
 
-	public TextActor(String text, int posX, int posY) {
-		this.text = text;
-		this.posX = posX;
-		this.posY = posY;
-		init();
+	private String message;
+	private int resultCode;
+
+	public TestResult(String message, int resultCode) {
+		this.message = message;
+		this.resultCode = resultCode;
 	}
 
-	@Override
-	public void draw(Batch batch, float parentAlpha) {
-		font.draw(batch, text, posX, posY);
+	public String getMessage() {
+		return message;
 	}
 
-	private void init() {
-		font = new BitmapFont();
-		font.setColor(1.0f, 0.0f, 0.0f, 1.0f);
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public int getResultCode() {
+		return resultCode;
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public void setText(String text) {
-		this.text = text;
+	public void setResultCode(int resultCode) {
+		this.resultCode = resultCode;
 	}
 }

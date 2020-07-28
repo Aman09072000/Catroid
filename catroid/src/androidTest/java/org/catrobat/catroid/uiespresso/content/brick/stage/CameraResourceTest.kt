@@ -31,7 +31,7 @@ import androidx.test.rule.GrantPermissionRule
 import org.catrobat.catroid.R
 import org.catrobat.catroid.content.bricks.CameraBrick
 import org.catrobat.catroid.content.bricks.ChooseCameraBrick
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.catrobat.catroid.testsuites.annotations.Cat.AppUi
 import org.catrobat.catroid.testsuites.annotations.Cat.Quarantine
 import org.catrobat.catroid.testsuites.annotations.Level.Functional
@@ -67,7 +67,7 @@ class CameraResourceTest {
         onView(ViewMatchers.withId(R.id.button_play)).perform(ViewActions.click())
         lastBrickInScript.waitUntilEvaluated(3000)
 
-        Assert.assertNull(StageActivity.getActiveCameraManager())
+        Assert.assertNull(org.catrobat.stage.StageActivity.getActiveCameraManager())
     }
 
     @Category(AppUi::class, Functional::class, Quarantine::class)
@@ -82,8 +82,8 @@ class CameraResourceTest {
         onView(ViewMatchers.withId(R.id.button_play)).perform(ViewActions.click())
         lastBrickInScript.waitUntilEvaluated(3000)
 
-        assertTrue(StageActivity.getActiveCameraManager().isCameraActive)
-        assertTrue(StageActivity.getActiveCameraManager().isCameraFacingFront)
+        assertTrue(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraActive)
+        assertTrue(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraFacingFront)
     }
 
     @Category(AppUi::class, Functional::class, Quarantine::class)
@@ -99,7 +99,7 @@ class CameraResourceTest {
         lastBrickInScript.waitUntilEvaluated(3000)
 
         Espresso.pressBack()
-        assertFalse(StageActivity.getActiveCameraManager().isCameraActive)
+        assertFalse(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraActive)
     }
 
     @Category(AppUi::class, Functional::class, Quarantine::class)
@@ -114,7 +114,7 @@ class CameraResourceTest {
         onView(ViewMatchers.withId(R.id.button_play)).perform(ViewActions.click())
         lastBrickInScript.waitUntilEvaluated(3000)
 
-        assertFalse(StageActivity.getActiveCameraManager().isCameraActive)
+        assertFalse(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraActive)
     }
 
     @Category(AppUi::class, Functional::class, Quarantine::class)
@@ -130,8 +130,8 @@ class CameraResourceTest {
         onView(ViewMatchers.withId(R.id.button_play)).perform(ViewActions.click())
         lastBrickInScript.waitUntilEvaluated(3000)
 
-        assertTrue(StageActivity.getActiveCameraManager().isCameraActive)
-        assertTrue(StageActivity.getActiveCameraManager().isCameraFacingFront)
+        assertTrue(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraActive)
+        assertTrue(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraFacingFront)
     }
 
     @Category(AppUi::class, Functional::class, Quarantine::class)
@@ -147,8 +147,8 @@ class CameraResourceTest {
         onView(ViewMatchers.withId(R.id.button_play)).perform(ViewActions.click())
         lastBrickInScript.waitUntilEvaluated(3000)
 
-        assertTrue(StageActivity.getActiveCameraManager().isCameraActive)
-        assertFalse(StageActivity.getActiveCameraManager().isCameraFacingFront)
+        assertTrue(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraActive)
+        assertFalse(org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraFacingFront)
     }
 
     companion object {

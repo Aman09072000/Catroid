@@ -41,7 +41,7 @@ import org.catrobat.catroid.common.ScreenValues.SCREEN_WIDTH
 import org.catrobat.catroid.formulaeditor.SensorCustomEvent
 import org.catrobat.catroid.formulaeditor.SensorCustomEventListener
 import org.catrobat.catroid.formulaeditor.Sensors
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import kotlin.math.roundToInt
 
 object FaceDetector : ImageAnalysis.Analyzer {
@@ -82,8 +82,8 @@ object FaceDetector : ImageAnalysis.Analyzer {
                 .addOnFailureListener { e ->
                     updateDetectionStatus(false)
                     val context = CatroidApplication.getAppContext()
-                    StageActivity.messageHandler.obtainMessage(
-                        StageActivity.SHOW_TOAST,
+                    org.catrobat.stage.StageActivity.messageHandler.obtainMessage(
+                        org.catrobat.stage.StageActivity.SHOW_TOAST,
                         arrayListOf(context.getString(R.string.camera_error_face_detection))
                     ).sendToTarget()
                     Log.e(javaClass.simpleName, "Could not analyze image.", e)
@@ -101,7 +101,7 @@ object FaceDetector : ImageAnalysis.Analyzer {
     }
 
     private fun translateFaceToSensorValues(face: Face, imageWidth: Int, imageHeight: Int) {
-        val invertAxis = StageActivity.getActiveCameraManager().isCameraFacingFront
+        val invertAxis = org.catrobat.stage.StageActivity.getActiveCameraManager().isCameraFacingFront
         val aspectRatio = imageWidth.toFloat() / imageHeight
         val faceBounds = face.boundingBox
 

@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2018 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.catrobat.catroid.stage;
+package org.catrobat.stage;
 
 import android.content.res.Resources;
 import android.os.SystemClock;
@@ -102,8 +102,8 @@ public class StageListener implements ApplicationListener {
 	private static final float AXIS_FONT_SIZE_SCALE_FACTOR = 0.025f;
 
 	private float deltaActionTimeDivisor = 10f;
-	public static final String SCREENSHOT_AUTOMATIC_FILE_NAME = "automatic_screenshot" + DEFAULT_IMAGE_EXTENSION;
-	public static final String SCREENSHOT_MANUAL_FILE_NAME = "manual_screenshot" + DEFAULT_IMAGE_EXTENSION;
+	public static final String SCREENSHOT_AUTOMATIC_FILE_NAME = "automatic_screenshot" + Constants.DEFAULT_IMAGE_EXTENSION;
+	public static final String SCREENSHOT_MANUAL_FILE_NAME = "manual_screenshot" + Constants.DEFAULT_IMAGE_EXTENSION;
 
 	private Stage stage = null;
 	private boolean paused = true;
@@ -202,7 +202,7 @@ public class StageListener implements ApplicationListener {
 		embroideryPatternManager = new DSTPatternManager();
 		initActors(sprites);
 
-		passepartout = new Passepartout(SCREEN_WIDTH, SCREEN_HEIGHT, maxViewPortWidth, maxViewPortHeight, virtualWidth, virtualHeight);
+		passepartout = new Passepartout(ScreenValues.SCREEN_WIDTH, ScreenValues.SCREEN_HEIGHT, maxViewPortWidth, maxViewPortHeight, virtualWidth, virtualHeight);
 		stage.addActor(passepartout);
 
 		axes = new Texture(Gdx.files.internal("stage/red_pixel.bmp"));
@@ -691,10 +691,10 @@ public class StageListener implements ApplicationListener {
 
 	public void toggleScreenMode() {
 		switch (project.getScreenMode()) {
-			case MAXIMIZE:
+			case ScreenModes.MAXIMIZE:
 				project.setScreenMode(ScreenModes.STRETCH);
 				break;
-			case STRETCH:
+			case ScreenModes.STRETCH:
 				project.setScreenMode(ScreenModes.MAXIMIZE);
 				break;
 		}
@@ -708,7 +708,7 @@ public class StageListener implements ApplicationListener {
 
 	private void initScreenMode() {
 		switch (project.getScreenMode()) {
-			case STRETCH:
+			case ScreenModes.STRETCH:
 				screenshotWidth = ScreenValues.getScreenWidthForProject(project);
 				screenshotHeight = ScreenValues.getScreenHeightForProject(project);
 				screenshotX = 0;
@@ -716,7 +716,7 @@ public class StageListener implements ApplicationListener {
 				viewPort = new ScalingViewport(Scaling.stretch, virtualWidth, virtualHeight, camera);
 				shapeRenderer.identity();
 				break;
-			case MAXIMIZE:
+			case ScreenModes.MAXIMIZE:
 				float yScale = 1.0f;
 				float xScale = 1.0f;
 				if (screenshotWidth != maxViewPortWidth && maxViewPortWidth > 0) {
@@ -737,7 +737,7 @@ public class StageListener implements ApplicationListener {
 			default:
 				break;
 		}
-		viewPort.update(SCREEN_WIDTH, SCREEN_HEIGHT, false);
+		viewPort.update(ScreenValues.SCREEN_WIDTH, ScreenValues.SCREEN_HEIGHT, false);
 		camera.position.set(0, 0, 0);
 		camera.update();
 		shapeRenderer.updateMatrices();

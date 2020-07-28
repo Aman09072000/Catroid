@@ -23,13 +23,13 @@
 package org.catrobat.catroid.content.actions
 
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 
 class ChooseCameraAction : TemporalAction() {
     private var cameraFacing = FRONT
 
     override fun update(percent: Float) {
-        val cameraManager = StageActivity.getActiveCameraManager()
+        val cameraManager = org.catrobat.stage.StageActivity.getActiveCameraManager()
         if (cameraFacing == FRONT) {
             cameraManager?.switchToFrontCamera()
         } else {

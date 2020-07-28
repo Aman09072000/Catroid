@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2019 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.catrobat.catroid.stage
+package org.catrobat.stage
 
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -33,6 +33,7 @@ import kotlinx.coroutines.launch
 import org.catrobat.catroid.common.Constants
 import java.io.File
 import java.io.IOException
+import java.nio.file.Files
 
 interface ScreenshotSaverCallback {
     fun screenshotSaved(success: Boolean)
@@ -103,7 +104,8 @@ class ScreenshotSaver(
         val streamScene = imageScene.write(false)
         try {
             File(folder + Constants.NO_MEDIA_FILE).createNewFile()
-            fullScreenBitmap.compress(Bitmap.CompressFormat.PNG, IMAGE_QUALITY, streamScene)
+            fullScreenBitmap.compress(Bitmap.CompressFormat.PNG,
+                                      IMAGE_QUALITY, streamScene)
             streamScene.close()
         } catch (e: IOException) {
             Log.w(TAG, "Could not save screenshot to file", e)

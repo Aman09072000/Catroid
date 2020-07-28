@@ -30,7 +30,7 @@ import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.formulaeditor.UserVariable
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.catrobat.catroid.utils.Utils
 import java.io.File
 import java.io.IOException
@@ -72,7 +72,8 @@ class WriteVariableToFileAction : EventAction() {
             val context = CatroidApplication.getAppContext()
             val message = context.getString(R.string.brick_write_variable_to_file_success, file)
             val params = ArrayList<Any>(listOf(message))
-            StageActivity.messageHandler.obtainMessage(StageActivity.SHOW_TOAST, params).sendToTarget()
+            org.catrobat.stage.StageActivity.messageHandler.obtainMessage(
+                org.catrobat.stage.StageActivity.SHOW_TOAST, params).sendToTarget()
         } catch (e: IOException) {
             Log.e(javaClass.simpleName, "Could not write variable value to storage.")
         }

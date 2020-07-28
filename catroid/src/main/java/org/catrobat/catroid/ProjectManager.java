@@ -38,6 +38,7 @@ import org.catrobat.catroid.content.Script;
 import org.catrobat.catroid.content.Setting;
 import org.catrobat.catroid.content.Sprite;
 import org.catrobat.catroid.content.WhenBounceOffScript;
+import org.catrobat.catroid.content.XmlHeader;
 import org.catrobat.catroid.content.backwardcompatibility.BrickTreeBuilder;
 import org.catrobat.catroid.content.bricks.ArduinoSendPWMValueBrick;
 import org.catrobat.catroid.content.bricks.Brick;
@@ -490,8 +491,9 @@ public final class ProjectManager implements EagerSingleton {
 	}
 
 	public boolean isCurrentProjectLandscapeMode() {
-		int virtualScreenWidth = getCurrentProject().getXmlHeader().virtualScreenWidth;
-		int virtualScreenHeight = getCurrentProject().getXmlHeader().virtualScreenHeight;
+		XmlHeader projectXmlHeader = project.getXmlHeader();
+		int virtualScreenWidth = projectXmlHeader.virtualScreenWidth;
+		int virtualScreenHeight = projectXmlHeader.virtualScreenHeight;
 
 		return virtualScreenWidth > virtualScreenHeight;
 	}

@@ -41,11 +41,12 @@ import org.catrobat.catroid.TrustedDomainManager
 import org.catrobat.catroid.common.Constants
 import org.catrobat.catroid.content.actions.AskAction
 import org.catrobat.catroid.content.actions.WebAction
+import org.catrobat.stage.StageLifeCycleController
 import java.net.URI
 import java.util.ArrayList
 import java.util.Collections
 
-class BrickDialogManager(val stageActivity: StageActivity) :
+class BrickDialogManager(val stageActivity: org.catrobat.stage.StageActivity) :
     DialogInterface.OnKeyListener, DialogInterface.OnDismissListener {
 
     private val openDialogs = Collections.synchronizedList(ArrayList<Dialog>())

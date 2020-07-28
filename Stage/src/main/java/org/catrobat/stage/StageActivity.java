@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2018 The Catrobat Team
+ * Copyright (C) 2010-2020 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,12 +20,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.catrobat.catroid.stage;
+package org.catrobat.stage;
 
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
@@ -220,7 +221,7 @@ public class StageActivity extends AndroidApplication implements PermissionHandl
 		} else {
 			StageLifeCycleController.stagePause(this);
 			idlingResource.increment();
-			stageListener.requestTakingScreenshot(SCREENSHOT_AUTOMATIC_FILE_NAME,
+			stageListener.requestTakingScreenshot(StageListener.SCREENSHOT_AUTOMATIC_FILE_NAME,
 					success -> runOnUiThread(() -> idlingResource.decrement()));
 			stageDialog.show();
 		}
@@ -396,9 +397,9 @@ public class StageActivity extends AndroidApplication implements PermissionHandl
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == TestResult.STAGE_ACTIVITY_TEST_SUCCESS
 				|| resultCode == TestResult.STAGE_ACTIVITY_TEST_FAIL) {
-			String message = data.getStringExtra(TEST_RESULT_MESSAGE);
+			String message = data.getStringExtra(TestResult.TEST_RESULT_MESSAGE);
 			ToastUtil.showError(this, message);
-			ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+			ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 			ClipData testResult = ClipData.newPlainText("TestResult",
 					ProjectManager.getInstance().getCurrentProject().getName() + "\n" + message);
 			clipboard.setPrimaryClip(testResult);
@@ -482,7 +483,7 @@ public class StageActivity extends AndroidApplication implements PermissionHandl
 		StageActivity stageActivity = StageActivity.activeStageActivity.get();
 		if (stageActivity != null && !stageActivity.isFinishing()) {
 			Intent resultIntent = new Intent();
-			resultIntent.putExtra(TEST_RESULT_MESSAGE, testResult.getMessage());
+			resultIntent.putExtra(TestResult.TEST_RESULT_MESSAGE, testResult.getMessage());
 			stageActivity.setResult(testResult.getResultCode(), resultIntent);
 			stageActivity.finish();
 		}

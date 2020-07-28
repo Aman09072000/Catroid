@@ -30,7 +30,7 @@ import org.catrobat.catroid.content.bricks.SetSizeToBrick
 import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.formulaeditor.FormulaElement
 import org.catrobat.catroid.formulaeditor.Sensors
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 import org.catrobat.catroid.testsuites.annotations.Cat.AppUi
 import org.catrobat.catroid.testsuites.annotations.Cat.Quarantine
 import org.catrobat.catroid.testsuites.annotations.Level.Functional
@@ -107,5 +107,5 @@ class FaceDetectionResourceTest {
         lastBrickInScript = ScriptEvaluationGateBrick.appendToScript(script)
     }
 
-    private fun faceDetectionOn() = StageActivity.getActiveCameraManager()?.faceDetectionOn ?: false
+    private fun faceDetectionOn() = org.catrobat.stage.StageActivity.getActiveCameraManager()?.faceDetectionOn ?: false
 }

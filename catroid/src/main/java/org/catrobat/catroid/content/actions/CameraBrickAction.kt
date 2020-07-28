@@ -23,16 +23,16 @@
 package org.catrobat.catroid.content.actions
 
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
-import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.stage.StageActivity
 
 class CameraBrickAction : TemporalAction() {
     var active = false
 
     override fun update(percent: Float) {
         if (active) {
-            StageActivity.getActiveCameraManager()?.startPreview()
+            org.catrobat.stage.StageActivity.getActiveCameraManager()?.startPreview()
         } else {
-            StageActivity.getActiveCameraManager()?.stopPreview()
+            org.catrobat.stage.StageActivity.getActiveCameraManager()?.stopPreview()
         }
     }
 }
