@@ -42,7 +42,7 @@ Since we are not allowed to have dependencies to our application module there ar
   * But it’s possible to just shift those classes also to stage module because then we can also use it in application module.
   * If this is done for all classes, we wouldn’t reach our goal to clearly separate Stage and IDE part and would need a refactoring of all issued classes.
 * Refactor every related class to don’t have dependencies back to the application module.
-  * After talking to Patrick, we tried to shift from outter to core. But even sthe smallest only stage related classes (“Actions” in Pocket Code, over a 100 files) have all dependencies to the application module.
+  * After talking to Patrick, we tried to shift from outter to core. But even the smallest only stage related classes (“Actions” in Pocket Code, over a 100 files) have all dependencies to the application module.
   * Each of these dependencies will result in another file which needs to be refactored to be separate.
   
 Example for [StopSoundAction.kt](https://github.com/Catrobat/Catroid/blob/develop/catroid/src/main/java/org/catrobat/catroid/content/actions/StopSoundAction.kt). 
@@ -178,7 +178,7 @@ External storage access will be limited to app specific storage directories and 
 
 # Bonus
 
-At the beginning of this project I was completely new to Kotling programming language. Nowadays Kotlin is more in use than Java and so I decided to learn Kotlin and 
+At the beginning of this project I was completely new to Kotlin programming language. Nowadays Kotlin is more in use than Java and so I decided to learn Kotlin and 
 try to write new Code in Kotlin and also refactor old ones. Kotlin is actually hard to read if you are a complete newbie. There are a lot of usefull Lambda and callback functions will really can produce a short and clean code. But they are sometimes also hard to read. Patrick, who already has experience in Kotlin, helped and supported me through this project with a lot of great ideas and also very good explanations. Big thanks to him for supporting me this way!
 
 
